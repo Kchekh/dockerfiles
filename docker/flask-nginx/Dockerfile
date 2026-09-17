@@ -1,12 +1,17 @@
-# Last modified: 2026-06-14T07:15:20.954157+00:00
+# Last modified: 2026-09-03T12:49:04.822646+00:00
 
-FROM demisto/crypto:1.0.0.10120494
+FROM demisto/crypto:1.0.0.12701738
 
 COPY requirements.txt .
 
 ENV TLDEXTRACT_CACHE="/tldextractcahce"
 
-RUN apk --update add nginx && \
+# Pin musl to 1.2.5 from the Alpine v3.23 repo (XSUP-72663).
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.23/main" >> /etc/apk/repositories && \
+  apk update && \
+  apk add "musl=~1.2.5" "musl-utils=~1.2.5" && \
+  apk --update add nginx && \
+  nginx -v && \
   mkdir -p /run/nginx && \
   mkdir -p /var/lib/nginx/tmp/cache && \
   mkdir -p /etc/nginx/ssl && \

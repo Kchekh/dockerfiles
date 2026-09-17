@@ -1,6 +1,6 @@
-# Last modified: 2026-05-17T20:42:46.431171+00:00
+# Last modified: 2026-09-01T01:19:18.012820+00:00
 
-FROM demisto/yarapy:1.0.0.9067966
+FROM demisto/yarapy:1.0.0.12571702
 
 COPY requirements.txt .
 
